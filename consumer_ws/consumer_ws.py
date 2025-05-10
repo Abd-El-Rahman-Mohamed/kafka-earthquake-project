@@ -1,4 +1,5 @@
-import asyncio, json
+import asyncio
+import json
 from confluent_kafka import Consumer
 import websockets
 
@@ -14,7 +15,8 @@ c.subscribe([TOPIC])
 
 clients = set()
 
-async def ws_handler(ws, path):
+# Updated WebSocket handler to accept only the websocket argument
+async def ws_handler(ws, path=None):
     clients.add(ws)
     try:
         await ws.wait_closed()
